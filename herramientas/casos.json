@@ -1,0 +1,191 @@
+[
+  {
+    "metodo": "GET",
+    "ruta": "/salud",
+    "esperado": {
+      "codigo": 200,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"estado\":\"ok\"}"
+    }
+  },
+  {
+    "metodo": "GET",
+    "ruta": "/convertir?de=USD&a=MXN&monto=10000",
+    "esperado": {
+      "codigo": 200,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"de\":\"USD\",\"a\":\"MXN\",\"monto_centavos\":10000,\"tasa_millonesimas\":18500000,\"resultado_centavos\":185000}"
+    }
+  },
+  {
+    "metodo": "GET",
+    "ruta": "/convertir?de=MXN&a=USD&monto=185000",
+    "esperado": {
+      "codigo": 200,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"de\":\"MXN\",\"a\":\"USD\",\"monto_centavos\":185000,\"tasa_millonesimas\":54054,\"resultado_centavos\":10000}"
+    }
+  },
+  {
+    "metodo": "GET",
+    "ruta": "/convertir?de=EUR&a=USD&monto=1",
+    "esperado": {
+      "codigo": 200,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"de\":\"EUR\",\"a\":\"USD\",\"monto_centavos\":1,\"tasa_millonesimas\":1086957,\"resultado_centavos\":1}"
+    }
+  },
+  {
+    "metodo": "GET",
+    "ruta": "/convertir?de=USD&a=EUR&monto=100000000",
+    "esperado": {
+      "codigo": 200,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"de\":\"USD\",\"a\":\"EUR\",\"monto_centavos\":100000000,\"tasa_millonesimas\":920000,\"resultado_centavos\":92000000}"
+    }
+  },
+  {
+    "metodo": "GET",
+    "ruta": "/convertir?de=USD&a=MXN&monto=007",
+    "esperado": {
+      "codigo": 200,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"de\":\"USD\",\"a\":\"MXN\",\"monto_centavos\":7,\"tasa_millonesimas\":18500000,\"resultado_centavos\":130}"
+    }
+  },
+  {
+    "metodo": "GET",
+    "ruta": "/convertir?de=USD&a=JPY&monto=100",
+    "esperado": {
+      "codigo": 404,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"error\":\"no hay tasa de USD a JPY\"}"
+    }
+  },
+  {
+    "metodo": "GET",
+    "ruta": "/convertir?de=usd&a=MXN&monto=100",
+    "esperado": {
+      "codigo": 404,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"error\":\"no hay tasa de usd a MXN\"}"
+    }
+  },
+  {
+    "metodo": "GET",
+    "ruta": "/convertir?de=USD&a=MXN",
+    "esperado": {
+      "codigo": 400,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"error\":\"faltan de, a o monto\"}"
+    }
+  },
+  {
+    "metodo": "GET",
+    "ruta": "/convertir?de=&a=MXN&monto=100",
+    "esperado": {
+      "codigo": 400,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"error\":\"faltan de, a o monto\"}"
+    }
+  },
+  {
+    "metodo": "GET",
+    "ruta": "/convertir?de=USD&a=MXN&monto=0",
+    "esperado": {
+      "codigo": 400,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"error\":\"monto debe ser un entero de centavos entre 1 y 100000000\"}"
+    }
+  },
+  {
+    "metodo": "GET",
+    "ruta": "/convertir?de=USD&a=MXN&monto=100000001",
+    "esperado": {
+      "codigo": 400,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"error\":\"monto debe ser un entero de centavos entre 1 y 100000000\"}"
+    }
+  },
+  {
+    "metodo": "GET",
+    "ruta": "/convertir?de=USD&a=MXN&monto=12.5",
+    "esperado": {
+      "codigo": 400,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"error\":\"monto debe ser un entero de centavos entre 1 y 100000000\"}"
+    }
+  },
+  {
+    "metodo": "GET",
+    "ruta": "/convertir?de=USD&a=MXN&monto=+500",
+    "esperado": {
+      "codigo": 400,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"error\":\"monto debe ser un entero de centavos entre 1 y 100000000\"}"
+    }
+  },
+  {
+    "metodo": "GET",
+    "ruta": "/convertir?de=USD&a=MXN&monto=-5",
+    "esperado": {
+      "codigo": 400,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"error\":\"monto debe ser un entero de centavos entre 1 y 100000000\"}"
+    }
+  },
+  {
+    "metodo": "GET",
+    "ruta": "/convertir?de=USD&a=MXN&monto=%2B500",
+    "esperado": {
+      "codigo": 400,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"error\":\"monto debe ser un entero de centavos entre 1 y 100000000\"}"
+    }
+  },
+  {
+    "metodo": "GET",
+    "ruta": "/convertir?de=USD&de=EUR&a=MXN&monto=100",
+    "esperado": {
+      "codigo": 200,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"de\":\"USD\",\"a\":\"MXN\",\"monto_centavos\":100,\"tasa_millonesimas\":18500000,\"resultado_centavos\":1850}"
+    }
+  },
+  {
+    "metodo": "GET",
+    "ruta": "/convertir?monto=100&a=MXN&de=EUR&extra=1",
+    "esperado": {
+      "codigo": 200,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"de\":\"EUR\",\"a\":\"MXN\",\"monto_centavos\":100,\"tasa_millonesimas\":20100000,\"resultado_centavos\":2010}"
+    }
+  },
+  {
+    "metodo": "POST",
+    "ruta": "/convertir?de=USD&a=MXN&monto=100",
+    "esperado": {
+      "codigo": 405,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"error\":\"método no permitido\"}"
+    }
+  },
+  {
+    "metodo": "GET",
+    "ruta": "/no-existe",
+    "esperado": {
+      "codigo": 404,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"error\":\"no encontrado\"}"
+    }
+  },
+  {
+    "metodo": "DELETE",
+    "ruta": "/no-existe",
+    "esperado": {
+      "codigo": 404,
+      "tipo": "application/json; charset=utf-8",
+      "cuerpo": "{\"error\":\"no encontrado\"}"
+    }
+  }
+]
